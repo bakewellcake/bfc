@@ -1,5 +1,9 @@
 #define BUFFER_LENGTH 30000
 
-extern int buffer[BUFFER_LENGTH];
+typedef unsigned char buffer_t;
 
-extern int data_pointer;
+extern buffer_t buffer[BUFFER_LENGTH];
+
+extern buffer_t *data_ptr;
+
+extern buffer_t *max_ptr;

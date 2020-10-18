@@ -4,8 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-int buffer[BUFFER_LENGTH] = { 0 };
-int data_pointer = 0;
+buffer_t buffer[BUFFER_LENGTH] = { 0 };
+buffer_t *data_ptr = buffer;
+buffer_t *max_ptr = 0;
 
 char *read_file(char *file_path) {
   FILE *file = fopen(file_path, "r");
@@ -37,9 +38,6 @@ int main(int argc, char **argv) {
   char *tokens = get_tokens(file);
 
   run_tokens(tokens);
-
-  free(file);
-  free(tokens);
 
   return 0;
 }

@@ -1,15 +1,15 @@
-void next(char token);
+void next();
 
-void prev(char token);
+void prev();
 
-void add(char token);
+void add();
 
-void sub(char token);
+void sub();
 
-void out(char token);
+void out();
 
-void in(char token);
+void in();
 
-void loop_begin(char token);
+void loop_begin();
 
-void loop_end(char token);
+void loop_end();

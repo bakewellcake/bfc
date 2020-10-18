@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+char valid_tokens[] = { '>', '<', '+', '-', '.', ',', '[', ']' };
+
 char *get_tokens(char *file) {
   int file_length = strlen(file);
   int token_count = 0;
@@ -29,27 +31,27 @@ void run_tokens(char *tokens) {
 
     switch (token) {
     case '>':
-      next(token);
+      next();
       break;
     case '<':
-      prev(token);
+      prev();
       break;
     case '+':
-      add(token);
+      add();
       break;
     case '-':
-      sub(token);
+      sub();
       break;
     case '.':
-      out(token);
+      out();
       break;
     case ',':
-      in(token);
+      in();
     case '[':
-      loop_begin(token);
+      loop_begin();
       break;
     case ']':
-      loop_end(token);
+      loop_end();
       break;
     }
   }
