@@ -1,3 +1,10 @@
-char *get_tokens (char *file);
+// typedef struct {
+//   char token;
+//   void (* command)();
+// } Token;
 
-void parse_tokens (char *tokens);
+char valid_tokens[] = { '>', '<', '+', '-', '.', ',', '[', ']' };
+
+char *get_tokens(char *file);
+
+void run_tokens(char *tokens);

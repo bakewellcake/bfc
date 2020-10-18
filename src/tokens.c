@@ -1,10 +1,10 @@
+#include "tokens.h"
+#include "cmd.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-char valid_tokens[] = { '>', '<', '+', '-', '.', ',', '[', ']' };
-
-char *get_tokens (char *file) {
+char *get_tokens(char *file) {
   int file_length = strlen(file);
   int token_count = 0;
   char *token_data = (char *) calloc(file_length, sizeof(char));
@@ -23,33 +23,34 @@ char *get_tokens (char *file) {
   return tokens;
 }
 
-void parse_tokens (char *tokens) {
+void run_tokens(char *tokens) {
   for (int i = 0; i < strlen(tokens); i++) {
-    switch (tokens[i]) {
+    char token = tokens[i];
+
+    switch (token) {
     case '>':
-      // next();
+      next(token);
       break;
-    // case valid_tokens[1]:
-    //   prev();
-    //   break;
-    // case valid_tokens[2]:
-    //   add();
-    //   break;
-    // case valid_tokens[3]:
-    //   sub();
-    //   break;
-    // case valid_tokens[4]:
-    //   out();
-    //   break;
-    // case valid_tokens[5]:
-    //   in();
-    //   break;
-    // case valid_tokens[6]:
-    //   loop_begin();
-    //   break;
-    // case valid_tokens[7]:
-    //   loop_end();
-    //   break;
+    case '<':
+      prev(token);
+      break;
+    case '+':
+      add(token);
+      break;
+    case '-':
+      sub(token);
+      break;
+    case '.':
+      out(token);
+      break;
+    case ',':
+      in(token);
+    case '[':
+      loop_begin(token);
+      break;
+    case ']':
+      loop_end(token);
+      break;
     }
   }
 }
