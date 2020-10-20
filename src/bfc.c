@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-buffer_t buffer[BUFFER_LENGTH] = { 0 };
-buffer_t *data_ptr = buffer;
+buffer_t mem_buf[BUFFER_LENGTH] = { 0 };
+buffer_t *data_ptr = mem_buf;
 buffer_t *max_ptr = 0;
 
 char *read_file(char *file_path) {
@@ -37,7 +37,20 @@ int main(int argc, char **argv) {
   char *file = read_file(file_path);
   char *tokens = get_tokens(file);
 
-  run_tokens(tokens);
+  struct TokenBuf t_buf;
+
+  t_buf.tokens = (char **) calloc(strlen(tokens), sizeof(char));
+
+  for (int t = 0; t < strlen(tokens); t++) {
+    t_buf.tokens[t] = &tokens[t];
+  }
+
+  t_buf.token_ptr = *t_buf.tokens;
+
+  free(file);
+  free(tokens);
+
+  run_tokens(&t_buf);
 
   return 0;
 }

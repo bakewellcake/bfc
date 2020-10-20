@@ -1,5 +1,6 @@
 #include "cmd.h"
 #include "buffer.h"
+#include "tokens.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -10,7 +11,7 @@ void next() {
 void prev() {
   --data_ptr;
 
-  if (data_ptr < buffer) {
+  if (data_ptr < mem_buf) {
     printf("Index out of range\n");
 
     exit(1);
@@ -31,7 +32,8 @@ void sub() {
 }
 
 void out() {
-  putchar(*data_ptr);
+  printf("%c\n", (char) *data_ptr);
+  // putchar(*data_ptr);
 }
 
 void in() {

@@ -25,9 +25,9 @@ char *get_tokens(char *file) {
   return tokens;
 }
 
-void run_tokens(char *tokens) {
-  for (int i = 0; i < strlen(tokens); i++) {
-    char token = tokens[i];
+void run_tokens(struct TokenBuf *t_buf) {
+  while (t_buf->token_ptr < *t_buf->tokens + strlen(*t_buf->tokens)) {
+    char token = *t_buf->token_ptr++;
 
     switch (token) {
     case '>':
