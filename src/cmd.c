@@ -6,6 +6,12 @@
 
 void next() {
   ++data_ptr;
+
+  if (data_ptr >= mem_buf + BUFFER_LENGTH) {
+    printf("Index out of range\n");
+
+    exit(1);
+  }
 }
 
 void prev() {
