@@ -37,7 +37,6 @@ int main(int argc, char **argv) {
   printf("Input: ");
 
   size_t len = 0;
-  int count = 0;
   char *file = read_file(file_path);
   char *tokens = get_tokens(file);
   char *input = fgetln(stdin, &len);
@@ -59,10 +58,18 @@ int main(int argc, char **argv) {
   free(file);
   free(input);
 
-  printf("\nDiagnostics:\n");
+  printf("\nDiagnostics:\n[");
 
   for (buffer_t *i = mem_buf; i <= max_ptr; i++) {
-    printf("%d: %d\n", count++, (int) *i);
+    char *term;
+
+    if (i == max_ptr) {
+      term = "]\n";
+    } else {
+      term = ", ";
+    }
+
+    printf("%d%s", (int) *i, term);
   }
 
   return 0;
