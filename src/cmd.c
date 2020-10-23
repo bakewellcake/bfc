@@ -58,6 +58,7 @@ void out() {
 }
 
 void in() {
+  *data_ptr = getchar();
 }
 
 void loop_begin(char **token_ptr) {
