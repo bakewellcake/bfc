@@ -34,42 +34,32 @@ int main(int argc, char **argv) {
     return 1;
   }
 
+  printf("Input: ");
+
+  size_t len = 0;
+  int count = 0;
   char *file = read_file(file_path);
   char *tokens = get_tokens(file);
+  char *input = fgetln(stdin, &len);
 
   struct TokenBuf t_buf;
   struct InputBuf i_buf;
 
   t_buf.tokens = (char **) calloc(strlen(tokens), sizeof(char));
-
-  printf("Input: ");
-
-  char *input = NULL;
-  size_t len = 0;
-
-  getline(&input, &len, stdin);
-
   i_buf.input = (char **) calloc(strlen(input), sizeof(char));
 
-  for (int t = 0; t < strlen(tokens); t++) {
-    t_buf.tokens[t] = &tokens[t];
-  }
-
-  for (int i = 0; i < strlen(input); i++) {
-    i_buf.input[i] = &input[i];
-  }
+  memcpy(t_buf.tokens, &tokens, strlen(tokens) + 1);
+  memcpy(i_buf.input, &input, strlen(input) + 1);
 
   t_buf.token_ptr = *t_buf.tokens;
   i_buf.input_ptr = *i_buf.input;
 
+  run_tokens(&t_buf, &i_buf);
+
   free(file);
   free(input);
 
-  run_tokens(&t_buf, &i_buf);
-
   printf("\nDiagnostics:\n");
-
-  int count = 0;
 
   for (buffer_t *i = mem_buf; i <= max_ptr; i++) {
     printf("%d: %d\n", count++, (int) *i);
