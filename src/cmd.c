@@ -5,8 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int loop_count = 0;
-
 void jump(char **token_ptr, char order[], int mod) {
   int count = 1;
 
