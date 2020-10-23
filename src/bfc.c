@@ -51,8 +51,12 @@ int main(int argc, char **argv) {
 
   run_tokens(&t_buf);
 
+  printf("\n\nDiagnostics:\n");
+
+  int count = 0;
+
   for (buffer_t *i = mem_buf; i <= max_ptr; i++) {
-    printf("%d\n", (int) *i);
+    printf("%d: %d\n", count++, (int) *i);
   }
 
   return 0;
