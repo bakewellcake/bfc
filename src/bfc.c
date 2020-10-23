@@ -42,17 +42,17 @@ int main(int argc, char **argv) {
   char *tokens = get_tokens(file);
   char *input = fgetln(stdin, &len);
 
-  struct TokenBuf t_buf;
-  struct InputBuf i_buf;
+  Buf t_buf;
+  Buf i_buf;
 
-  t_buf.tokens = (char **) calloc(strlen(tokens), sizeof(char));
-  i_buf.input = (char **) calloc(strlen(input), sizeof(char));
+  t_buf.buf_data = (char **) calloc(strlen(tokens), sizeof(char));
+  i_buf.buf_data = (char **) calloc(strlen(input), sizeof(char));
 
-  memcpy(t_buf.tokens, &tokens, strlen(tokens) + 1);
-  memcpy(i_buf.input, &input, strlen(input) + 1);
+  memcpy(t_buf.buf_data, &tokens, strlen(tokens) + 1);
+  memcpy(i_buf.buf_data, &input, strlen(input) + 1);
 
-  t_buf.token_ptr = *t_buf.tokens;
-  i_buf.input_ptr = *i_buf.input;
+  t_buf.buf_ptr = *t_buf.buf_data;
+  i_buf.buf_ptr = *i_buf.buf_data;
 
   run_tokens(&t_buf, &i_buf);
 
