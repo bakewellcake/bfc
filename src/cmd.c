@@ -7,38 +7,16 @@
 
 int loop_count = 0;
 
-void jump_forward(char **token_ptr) {
-  int begin_count = 1;
+void jump(char **token_ptr, char order[], int mod) {
+  int count = 1;
 
-  while (begin_count) {
-    (*token_ptr)++;
+  while (count) {
+    (*token_ptr) += mod;
 
-    if (**token_ptr == '[') {
-      begin_count++;
-
-      continue;
-    }
-
-    if (**token_ptr == ']') {
-      begin_count--;
-    }
-  }
-}
-
-void jump_backward(char **token_ptr) {
-  int end_count = 1;
-
-  while (end_count) {
-    (*token_ptr)--;
-
-    if (**token_ptr == ']') {
-      end_count++;
-
-      continue;
-    }
-
-    if (**token_ptr == '[') {
-      end_count--;
+    if (**token_ptr == order[0]) {
+      count++;
+    } else if (**token_ptr == order[1]) {
+      count--;
     }
   }
 }
@@ -88,13 +66,13 @@ void loop_begin(char **token_ptr) {
   if (*data_ptr) {
     (*token_ptr)++;
   } else {
-    jump_forward(token_ptr);
+    jump(token_ptr, "[]", 1);
   }
 }
 
 void loop_end(char **token_ptr) {
   if (*data_ptr) {
-    jump_backward(token_ptr);
+    jump(token_ptr, "][", -1);
   } else {
     (*token_ptr)++;
   }
