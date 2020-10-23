@@ -23,7 +23,7 @@ void next() {
   ++data_ptr;
 
   if (data_ptr >= mem_buf + BUFFER_LENGTH) {
-    printf("Index out of range\n");
+    printf("Index out of range positively: %d\n", *data_ptr);
 
     exit(1);
   }
@@ -33,7 +33,7 @@ void prev() {
   --data_ptr;
 
   if (data_ptr < mem_buf) {
-    printf("Index out of range\n");
+    printf("Index out of range negatively: %d\n", *data_ptr);
 
     exit(1);
   }
@@ -57,8 +57,15 @@ void out() {
   putchar(*data_ptr);
 }
 
-void in() {
-  *data_ptr = getchar();
+void in(char **input_ptr, int len) {
+  *data_ptr = **input_ptr;
+
+  if (*data_ptr < len) {
+    (*input_ptr)++;
+  } else {
+    **input_ptr = -1;
+  }
+  // *data_ptr = getchar();
 }
 
 void loop_begin(char **token_ptr) {

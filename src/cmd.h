@@ -8,7 +8,7 @@ void sub();
 
 void out();
 
-void in();
+void in(char **input_ptr, int len);
 
 void loop_begin(char **token_ptr);
 

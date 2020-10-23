@@ -38,20 +38,36 @@ int main(int argc, char **argv) {
   char *tokens = get_tokens(file);
 
   struct TokenBuf t_buf;
+  struct InputBuf i_buf;
 
   t_buf.tokens = (char **) calloc(strlen(tokens), sizeof(char));
+
+  printf("Input: ");
+
+  char *input = NULL;
+  size_t len = 0;
+
+  getline(&input, &len, stdin);
+
+  i_buf.input = (char **) calloc(strlen(input), sizeof(char));
 
   for (int t = 0; t < strlen(tokens); t++) {
     t_buf.tokens[t] = &tokens[t];
   }
 
+  for (int i = 0; i < strlen(input); i++) {
+    i_buf.input[i] = &input[i];
+  }
+
   t_buf.token_ptr = *t_buf.tokens;
+  i_buf.input_ptr = *i_buf.input;
 
   free(file);
+  free(input);
 
-  run_tokens(&t_buf);
+  run_tokens(&t_buf, &i_buf);
 
-  printf("\n\nDiagnostics:\n");
+  printf("\nDiagnostics:\n");
 
   int count = 0;
 

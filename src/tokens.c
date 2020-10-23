@@ -25,8 +25,8 @@ char *get_tokens(char *file) {
   return tokens;
 }
 
-int run_token(char **token_ptr) {
-  switch (**token_ptr) {
+int run_token(struct TokenBuf *t_buf, struct InputBuf *i_buf) {
+  switch (*t_buf->token_ptr) {
   case '>':
     next();
     break;
@@ -43,21 +43,21 @@ int run_token(char **token_ptr) {
     out();
     break;
   case ',':
-    in();
+    in(&i_buf->input_ptr, **i_buf->input + strlen(*i_buf->input));
   case '[':
-    loop_begin(token_ptr);
+    loop_begin(&t_buf->token_ptr);
     return 0;
   case ']':
-    loop_end(token_ptr);
+    loop_end(&t_buf->token_ptr);
     return 0;
   }
 
   return 1;
 }
 
-void run_tokens(struct TokenBuf *t_buf) {
+void run_tokens(struct TokenBuf *t_buf, struct InputBuf *i_buf) {
   while (t_buf->token_ptr < *t_buf->tokens + strlen(*t_buf->tokens)) {
-    int token = run_token(&t_buf->token_ptr);
+    int token = run_token(t_buf, i_buf);
 
     if (token) {
       t_buf->token_ptr++;
