@@ -10,6 +10,6 @@ void out();
 
 void in();
 
-void loop_begin();
+void loop_begin(char **token_ptr);
 
-void loop_end();
+void loop_end(char **token_ptr);

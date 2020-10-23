@@ -48,9 +48,12 @@ int main(int argc, char **argv) {
   t_buf.token_ptr = *t_buf.tokens;
 
   free(file);
-  free(tokens);
 
   run_tokens(&t_buf);
+
+  for (buffer_t *i = mem_buf; i <= max_ptr; i++) {
+    printf("%d\n", (int) *i);
+  }
 
   return 0;
 }
