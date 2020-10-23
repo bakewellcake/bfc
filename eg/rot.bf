@@ -7,7 +7,7 @@
             <[[>+<-]>>+>]    Special case: move remainder back to divisor and increase quotient
             <<<<<-           Decrement dividend
         ]                    End division loop
-    ]>>>[-]+                 End skip loop; zero former divisor and reus space for a flag
+    ]>>>[-]+                 End skip loop; zero former divisor and reuse space for a flag
     >--[-[<->+++[-]]]<[         Zero that flag unless quotient was 2 or 3; zero quotient; check flag
         ++++++++++++<[       If flag then set up divisor (13) for second division loop
                                (MEMORY LAYOUT: zero copy dividend divisor remainder quotient zero zero)
@@ -25,4 +25,4 @@
     <[-]                     Clear remainder from first division if second division was skipped
     <.[-]                    Output ROT13ed character from copy and clear it
     <-,+                     Read next character
-] e
+]                            End character reading loop
