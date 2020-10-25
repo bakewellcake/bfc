@@ -51,7 +51,9 @@ int main(int argc, char **argv) {
   size_t len = 0;
   char *file = read_file(file_path);
   char *tokens = get_tokens(file);
-  char *input = fgetln(stdin, &len);
+  char *input;
+
+  getline(&input, &len, stdin);
 
   Buf t_buf = create_buffer(tokens);
   Buf i_buf = create_buffer(input);
