@@ -25,18 +25,6 @@ char *read_file(char *file_path) {
   return contents;
 }
 
-Buf create_buffer(char *str) {
-  Buf buf;
-
-  buf.buf_data = (char **) calloc(strlen(str), sizeof(char *));
-
-  memcpy(buf.buf_data, &str, strlen(str) + sizeof(char *));
-
-  buf.buf_ptr = *buf.buf_data;
-
-  return buf;
-}
-
 int main(int argc, char **argv) {
   char *file_path = argv[1];
 
@@ -57,8 +45,8 @@ int main(int argc, char **argv) {
 
   input[strcspn(input, "\n")] = 0;
 
-  Buf t_buf = create_buffer(tokens);
-  Buf i_buf = create_buffer(input);
+  Buf t_buf = *((Buf *) create_buffer(tokens));
+  Buf i_buf = *((Buf *) create_buffer(input));
 
   run_tokens(&t_buf, &i_buf);
 
