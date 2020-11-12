@@ -15,3 +15,7 @@ make
 ```sh
 ./bfc [FILE_NAME]
 ```
+
+## Bugs
+
+- Certain letter combinations don't output properly with the [rot](/eg/rot.bf) example.
