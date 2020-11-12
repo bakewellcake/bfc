@@ -28,9 +28,9 @@ char *read_file(char *file_path) {
 Buf create_buffer(char *str) {
   Buf buf;
 
-  buf.buf_data = (char **) calloc(strlen(str), sizeof(char));
+  buf.buf_data = (char **) calloc(strlen(str), sizeof(char *));
 
-  memcpy(buf.buf_data, &str, strlen(str) + 1);
+  memcpy(buf.buf_data, &str, strlen(str) + sizeof(char *));
 
   buf.buf_ptr = *buf.buf_data;
 
@@ -54,6 +54,8 @@ int main(int argc, char **argv) {
   char *input;
 
   getline(&input, &len, stdin);
+
+  input[strcspn(input, "\n")] = 0;
 
   Buf t_buf = create_buffer(tokens);
   Buf i_buf = create_buffer(input);

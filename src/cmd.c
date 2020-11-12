@@ -5,11 +5,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void jump(char **token_ptr, char order[], int mod) {
+void jump(char **token_ptr, int mod) {
   int count = 1;
+  char *order;
+
+  if (mod == 1) {
+    order = "[]";
+  } else {
+    order = "][";
+  }
 
   while (count) {
     (*token_ptr) += mod;
+
+    if (!**token_ptr) {
+      break;
+    }
 
     if (**token_ptr == order[0]) {
       count++;
@@ -72,13 +83,13 @@ void loop_begin(char **token_ptr) {
   if (*data_ptr) {
     (*token_ptr)++;
   } else {
-    jump(token_ptr, "[]", 1);
+    jump(token_ptr, 1);
   }
 }
 
 void loop_end(char **token_ptr) {
   if (*data_ptr) {
-    jump(token_ptr, "][", -1);
+    jump(token_ptr, -1);
   } else {
     (*token_ptr)++;
   }

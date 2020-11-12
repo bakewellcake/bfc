@@ -57,9 +57,7 @@ int run_token(Buf *t_buf, Buf *i_buf) {
 
 void run_tokens(Buf *t_buf, Buf *i_buf) {
   while (t_buf->buf_ptr < *t_buf->buf_data + strlen(*t_buf->buf_data)) {
-    int token = run_token(t_buf, i_buf);
-
-    if (token) {
+    if (run_token(t_buf, i_buf)) {
       t_buf->buf_ptr++;
     }
   }
