@@ -44,6 +44,7 @@ int run_token(Buf *t_buf, Buf *i_buf) {
     break;
   case ',':
     in(&i_buf->buf_ptr, **i_buf->buf_data + strlen(*i_buf->buf_data));
+    break;
   case '[':
     loop_begin(&t_buf->buf_ptr);
     return 0;

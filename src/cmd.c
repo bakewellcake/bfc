@@ -59,12 +59,10 @@ void add() {
 }
 
 void sub() {
-  // @TODO: Should this support negative loop around?
   --*data_ptr;
 }
 
 void out() {
-  // printf("%c\n", (char) *data_ptr);
   putchar(*data_ptr);
 }
 
@@ -76,7 +74,6 @@ void in(char **input_ptr, int len) {
   } else {
     **input_ptr = -1;
   }
-  // *data_ptr = getchar();
 }
 
 void loop_begin(char **token_ptr) {
